@@ -480,6 +480,9 @@ img {
 .skills__cpam{
   width: 75%;
 }
+.skills__figma{
+  width: 45%;
+}
 .skills__close .skills__list{
   height: 0;
   overflow: hidden;
@@ -687,6 +690,10 @@ img {
 .swiper-pagination-bullet{
   outline: none;
 }
+.swiper-pagination-bullet{
+  width:var(--swiper-pagination-bullet-width,var(--swiper-pagination-bullet-size,10px));
+  height:var(--swiper-pagination-bullet-height,var(--swiper-pagination-bullet-size,10px));
+}
 /*==================== Coursers ====================*/
 .coursers__container{
   overflow: initial;
@@ -804,6 +811,9 @@ img {
 .footer__social{
   color: #fff;
   font-weight: var(--font-medium);
+}
+.footer__title{
+  width: 20px;
 }
 /*========== SCROLL UP ==========*/
 .scrollup{
@@ -1054,6 +1064,11 @@ img {
   .main,
   .footer__container{
     padding: 0;
+  }
+  .footer__container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
   }
   .home__blob{
     width: 320px;
