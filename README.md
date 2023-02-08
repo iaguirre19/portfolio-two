@@ -8,5 +8,5 @@
 - Developed first with the Mobile First methodology, then for desktop.
 - Compatible with all mobile devices and with a beautiful and pleasant user interface.
 
-Click here to see the Portfolio [Website](https://iranaguirre-portofolio.netlify.app/)
+Click here to see the [Portfolio](https://iranaguirre-portofolio.netlify.app/)
 
