@@ -1,7 +1,9 @@
 /*==================== MENU SHOW Y HIDDEN ====================*/
 const   navMenu = document.getElementById('nav-menu'),
         navToggle = document.getElementById('nav-toggle'),
-        navClose = document.getElementById('nav-close');
+        navClose = document.getElementById('nav-close'),
+        inputs = document.querySelectorAll('.inputForm');
+        inputsDark = document.querySelectorAll(".contact__content");
 
 /*===== MENU SHOW =====*/
 /* Validate if constant exists */
@@ -141,17 +143,27 @@ function scrollActive() {
   sections.forEach((current) => {
     const sectionHeight = current.offsetHeight;
     const sectionTop = current.offsetTop - 50;
-    sectionId = current.getAttribute("id");
-
-    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-      document
-        .querySelector(".nav__menu a[href*=" + sectionId + "]")
-        .classList.add("active-link");
-    } else {
-      document
-        .querySelector(".nav__menu a[href*=" + sectionId + "]")
-        .classList.remove("active-link");
+    let sectionId = current.getAttribute("id");
+    const menuLink = document.querySelector(
+      '.nav__menu a[href*="' + sectionId + '"]'
+    );
+    if (menuLink !== null) {
+      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+        menuLink.classList.add("active-link");
+      } else {
+        menuLink.classList.remove("active-link");
+      }
     }
+
+    // if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+    //   document
+    //     .querySelector(".nav__menu a[href*=" + sectionId + "]")
+    //     .classList.add("active-link");
+    // } else {
+    //   document
+    //     .querySelector('.nav__menu a[href*="' + sectionId + '"]')
+    //     .classList.remove("active-link");
+    // }
   });
 }
 window.addEventListener("scroll", scrollActive);
@@ -187,6 +199,7 @@ const selectedIcon = localStorage.getItem('selected-icon')
 
 // We obtain the current theme that the interface has by validating the dark-theme class
 const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
+
 const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? "uil-moon" : "uil-sun";
 
 // We validate if the user previously chose a topic
@@ -196,12 +209,74 @@ if (selectedTheme) {
   themeButton.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme)
 }
 
+
 // Activate / deactivate the theme manually with the button
 themeButton.addEventListener('click', () => {
     // Add or remove the dark / icon theme
     document.body.classList.toggle(darkTheme)
     themeButton.classList.toggle(iconTheme)
+    if(document.body.classList.contains(darkTheme)){
+      inputsDark.forEach((eachInput) => {
+        eachInput.classList.add("dark-input");
+      })
+    }else{
+      inputsDark.forEach((eachInput) => {
+        eachInput.classList.remove("dark-input");
+      });
+    }
     // We save the theme and the current icon that the user chose
     localStorage.setItem('selected-theme', getCurrentTheme())
     localStorage.setItem('selected-icon', getCurrentIcon())
 })
+
+// Form
+
+inputs.forEach((input) => {
+  input.addEventListener("blur", (input) => {
+    validityForm(input.target);
+  });
+});
+
+function validityForm(input){
+  const typeOfInput = input.dataset.type;
+  if(input.validity.valid){
+    input.parentElement.classList.add("input__container--valid");
+    input.parentElement.classList.remove("input__container--invalid");
+    input.parentElement.classList.remove(".input-message-error");
+  }else{
+    input.parentElement.classList.remove("input__container--valid");
+    input.parentElement.classList.add("input__container--invalid");
+    input.parentElement.querySelector(".input-message-error").innerHTML = showMessage(typeOfInput, input);
+
+  };
+};
+
+const typeOfError = [
+  "valueMissing",
+  "typeMismatch"
+];
+const messageOfError = {
+  name: {
+    valueMissing: "The field name cannot be empty",
+  },
+  email: {
+    valueMissing: "The field email cannot be empty",
+    typeMismatch: "The email is not valid",
+  },
+  message: {
+    valueMissing: "The field message cannot be empty",
+  },
+}; 
+
+function showMessage(typeOfInput, input) {
+  let message = "";
+  typeOfError.forEach((error) => {
+    if(input.validity[error]) {
+      console.log(typeOfInput, error);
+      console.log(input.validity[error]);
+      console.log(messageOfError[typeOfInput][error]);
+      message = messageOfError[typeOfInput][error];
+    }
+  });
+  return message;
+}

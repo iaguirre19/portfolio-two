@@ -19,6 +19,8 @@
     --container-color: #fff;
     --scroll-bar-color: hsl(var(--hue-color), 12%, 90%);
     --scroll-thumb-color: hsl(var(--hue-color), 12%, 80%);
+    --background-invalidity:hsl(0, 65%,80%);
+    --background-valid: hsl(133, 48%, 85%);
 
     /*========== Font and typography ==========*/
     --body-font: 'Poppins', sans-serif;
@@ -77,6 +79,8 @@ body.dark-theme{
     --container-color: hsl(var(--hue-color), 29%, 16%);
     --scroll-bar-color: hsl(var(--hue-color), 12%, 48%);
     --scroll-thumb-color: hsl(var(--hue-color), 12%, 36%);
+    --background-invalidity:hsl(0, 65%,80%);
+    --background-valid: hsl(133, 46%, 54%);
 }
 
 /*========== Button Dark/Light ==========*/
@@ -743,6 +747,7 @@ img {
   background-color: var(--input-color);
   border-radius: .5rem;
   padding: .75rem 1rem .25rem;
+  position: relative;
 }
 .contact__label{
   font-size: var(--small-font-size);
@@ -758,6 +763,44 @@ img {
   outline: none;
   padding: .25rem .5rem .5rem 0;
 }
+.contact__content.dark-input .contact__input{
+  color: white;
+}
+.contact__content.dark-input .input-message-error{
+  color: rgb(222, 79, 79);
+}
+
+.contact__content.input__container--valid,
+.contact__content.input__container--valid .contact__input{
+  background-color: var(--background-valid);
+}
+.contact__content.input__container--invalid,
+.contact__content.input__container--invalid .contact__input{
+  background-color: var(--background-invalidity);
+  padding-bottom:1rem;
+}
+.contact__content.input__container--invalid .contact__label{
+  color: white;
+}
+.input-message-error {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 1.1rem;
+  transition: all 1s ease-in-out;
+}
+
+.contact__content.input__container--invalid .input-message-error{
+  display: block;
+}
+
+.input-container--invalid .input-message-error {
+  color: red;
+  display: block;
+  margin-top: 0.5rem;
+  padding-left: 0.5rem;
+}
+
 .contact__button-funcional{
   border: none;
   border-radius: none;
