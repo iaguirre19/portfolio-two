@@ -446,16 +446,16 @@ img {
   background-color: var(--first-color);
 }
 .skills__html{
-  width: 85%;
+  width: 90%;
 }
 .skills__css{
-  width: 70%;
+  width: 80%;
 }
 .skills__js{
-  width: 35%;
+  width: 65%;
 }
 .skills__tailwind{
-  width: 60%;
+  width: 70%;
 }
 .skills__boostrap{
   width: 70%;
@@ -473,7 +473,13 @@ img {
   width: 40%;
 }
 .skills__figma{
+  width: 75%;
+}
+.skills__node{
   width: 50%;
+}
+.skills__mongo{
+  width: 40%;
 }
 .skills__sketch{
   width: 75%;
@@ -483,9 +489,6 @@ img {
 }
 .skills__cpam{
   width: 75%;
-}
-.skills__figma{
-  width: 45%;
 }
 .skills__close .skills__list{
   height: 0;
